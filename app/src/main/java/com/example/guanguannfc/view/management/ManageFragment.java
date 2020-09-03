@@ -10,7 +10,9 @@ import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -35,6 +37,7 @@ import com.example.guanguannfc.controller.dataManagement.ActivityManage;
 import com.example.guanguannfc.controller.dataManagement.ThingManage;
 import com.example.guanguannfc.controller.nfcManagement.NFCManage;
 import com.example.guanguannfc.view.homepage.HomePageActivity;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -191,6 +194,7 @@ public class ManageFragment extends Fragment {
                 return false;
             }
         });
+
 
 
         ImageView addbox = view.findViewById(R.id.iv_addbox);
@@ -496,6 +500,11 @@ public class ManageFragment extends Fragment {
                 showToastShort("展开了数据___"+groups[groupPosition]);
             }
         });
+
+
+
+
+
 
 
 

@@ -312,25 +312,34 @@
 
 
 
-        <ListView
-            android:id="@+id/lv_allacts"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/data_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="55dp"
-
-            android:divider="@android:color/transparent"
-            android:dividerHeight="20sp"
-
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ll_actshow"
+            app:layout_constraintTop_toBottomOf="@+id/ll_actshow">
+            <ListView
+                android:id="@+id/lv_allacts"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="55dp"
+
+                android:divider="@android:color/transparent"
+                android:dividerHeight="20sp"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ll_actshow"
 
 
-            >
+                >
 
 
-        </ListView>
+            </ListView>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
         <TextView
             android:id="@+id/text_noActInfo"

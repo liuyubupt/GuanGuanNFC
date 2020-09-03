@@ -10,6 +10,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -76,6 +77,7 @@ public class DataFragment extends Fragment {
     private ListView lv_allactlist;
     private ActShowAdapter actShowAdapter;
     private ConstraintLayout.LayoutParams layoutParams;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private boolean isCount;
     // 获取颜色资源文件
     int colorgray,colorRedDark;
@@ -169,6 +171,20 @@ public class DataFragment extends Fragment {
 //      颜色
         colorgray = getResources().getColor(R.color.colorgray);
         colorRedDark = getResources().getColor(R.color.colorRedDark);
+
+        swipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.data_refresh);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorDark);
+        swipeRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.colorWhite);
+        swipeRefreshLayout.setSize(SwipeRefreshLayout.DEFAULT);
+        swipeRefreshLayout.setProgressViewEndTarget(true,200);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+
 
 
     }
