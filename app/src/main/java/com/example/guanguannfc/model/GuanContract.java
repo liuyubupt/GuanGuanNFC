@@ -19,6 +19,8 @@ public class GuanContract {
         public static final String COLUMN_PASSWORD = "password";
         public static final String COLUMN_ACTIVE_DAY = "active_day";
         public static final String COLUMN_LAST_ACT = "last_act";
+        public static final String COLUMN_RANK = "rank";
+        public static final String COLUMN_STUDY = "is_studied";
         public static final String COLUMN_CREATED_TIME = "created_time";
         public static final String COLUMN_UPDATED_TIME = "updated_time";
         public static final String SQL_CREATE_TABLE = "CREATE TABLE "
@@ -26,8 +28,10 @@ public class GuanContract {
                 UserInfo._ID + " INTEGER PRIMARY KEY AUTOINCREMENT" + COMMA_SEP +
                 UserInfo.COLUMN_USER_NAME + TEXT_TYPE + UNIQUE_TYPE + COMMA_SEP +
                 UserInfo.COLUMN_PASSWORD + TEXT_TYPE + COMMA_SEP +
-                UserInfo.COLUMN_ACTIVE_DAY + INT_TYPE + " DEFAULT 0"+ COMMA_SEP +
+                UserInfo.COLUMN_ACTIVE_DAY + INT_TYPE + " DEFAULT 0" + COMMA_SEP +
                 UserInfo.COLUMN_LAST_ACT + TEXT_TYPE + " DEFAULT '1970年1月1日'" + COMMA_SEP +
+                UserInfo.COLUMN_RANK + INT_TYPE + " DEFAULT 0" + COMMA_SEP +
+                UserInfo.COLUMN_STUDY + INT_TYPE + " DEFAULT 0" + COMMA_SEP +
                 UserInfo.COLUMN_CREATED_TIME + INT_TYPE + COMMA_SEP +
                 UserInfo.COLUMN_UPDATED_TIME + INT_TYPE + " )";
         public static final String SQL_DELETE_ENTRIES =
@@ -81,6 +85,8 @@ public class GuanContract {
         public static final String COLUMN_MOMENT_TEXT = "moment_text";
         public static final String COLUMN_IS_SHARED = "is_shared";
         public static final String COLUMN_SHARED_TIME = "shared_time";
+        public static final String COLUMN_IS_RANKED = "is_ranked";
+        public static final String COLUMN_RANKED_TIME = "ranked_time";
         public static final String COLUMN_CREATED_TIME = "created_time";
         public static final String COLUMN_UPDATED_TIME = "updated_time";
         public static final String SQL_CREATE_TABLE = "CREATE TABLE "
@@ -92,6 +98,8 @@ public class GuanContract {
                 ActSta.COLUMN_MOMENT_TEXT + TEXT_TYPE + " default ''" + COMMA_SEP +
                 ActSta.COLUMN_IS_SHARED + INT_TYPE + " default 0" + COMMA_SEP +
                 ActSta.COLUMN_SHARED_TIME + INT_TYPE + COMMA_SEP +
+                ActSta.COLUMN_IS_RANKED + INT_TYPE + " default 0" + COMMA_SEP +
+                ActSta.COLUMN_RANKED_TIME + INT_TYPE + COMMA_SEP +
                 ActSta.COLUMN_CREATED_TIME + INT_TYPE + COMMA_SEP +
                 ActSta.COLUMN_UPDATED_TIME + INT_TYPE + COMMA_SEP +
                 " FOREIGN KEY (" + ActSta.COLUMN_ACT_ID + ") REFERENCES " + Activity.TABLE_NAME + "(" + Activity._ID + ")"
