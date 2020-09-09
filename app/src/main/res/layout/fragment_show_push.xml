@@ -22,24 +22,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tv_push_title"
+        <LinearLayout
+            android:id="@+id/lay_showpush2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:text="标题"
-            android:textSize="30sp"
-            app:layout_constraintHorizontal_bias="0.5" />
+            android:layout_height="111dp"
+            android:orientation="vertical"
+            android:background="@drawable/img_push1">
 
-        <TextView
-            android:id="@+id/tv_push_author"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="作者"
-            android:textSize="20sp"></TextView>
+            <TextView
+                android:id="@+id/tv_push_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="标题"
+                android:textSize="30sp"
+                app:layout_constraintHorizontal_bias="0.5" />
+
+            <TextView
+                android:id="@+id/tv_push_author"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="作者"
+                android:textSize="20sp"></TextView>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tv_push_content"

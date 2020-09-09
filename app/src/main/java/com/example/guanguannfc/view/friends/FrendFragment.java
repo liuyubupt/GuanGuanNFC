@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -27,7 +28,7 @@ public class FrendFragment extends Fragment {
     private View view;
     private String userName;
     private ConstraintLayout cl_friend,cl_friendAct;
-    private TextView tv_friend,tv_friendAct;
+    private ImageView tv_friend,tv_friendAct;
     private List<FriendItem> friendItemsList=new ArrayList<FriendItem>();
     private List<FriendActItem> friendActItemList = new ArrayList<FriendActItem>();
     private ListView lv_friends,lv_friendAct;
@@ -145,8 +146,8 @@ public class FrendFragment extends Fragment {
             public void onClick(View view) {
                 cl_friend.setVisibility(View.VISIBLE);
                 cl_friendAct.setVisibility(View.INVISIBLE);
-                tv_friend.setTextColor(Color.RED);
-                tv_friendAct.setTextColor(R.color.colorgray);
+                tv_friend.setImageDrawable(getResources().getDrawable((R.drawable.img_friend2)));
+                tv_friendAct.setImageDrawable(getResources().getDrawable((R.drawable.img_nofriend1)));
             }
         });
         view.findViewById(R.id.text_frindAct).setOnClickListener(new View.OnClickListener() {
@@ -155,8 +156,8 @@ public class FrendFragment extends Fragment {
             public void onClick(View view) {
                 cl_friend.setVisibility(View.INVISIBLE);
                 cl_friendAct.setVisibility(View.VISIBLE);
-                tv_friendAct.setTextColor(Color.RED);
-                tv_friend.setTextColor(R.color.colorgray);
+                tv_friendAct.setImageDrawable(getResources().getDrawable((R.drawable.img_nofriend1)));
+                tv_friend.setImageDrawable(getResources().getDrawable((R.drawable.img_friend2)));
                 getFriendAct();
                 if (friendActList != null) {
                     initFriendAct(friendActList);

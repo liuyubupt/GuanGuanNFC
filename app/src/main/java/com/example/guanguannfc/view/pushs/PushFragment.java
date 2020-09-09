@@ -31,6 +31,7 @@ public class PushFragment extends Fragment {
     private Context context;
     private String [][] pushlist;
     private String [] pushl;
+    private String [] pl;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,7 +52,8 @@ public class PushFragment extends Fragment {
         pushItemList.clear();
         for(int i=0;i<pushlist.length;i++){
             pushl=pushlist[i];
-            PushItem pushItem2 = new PushItem(pushlist[i],Integer.toString(R.drawable.img_time1));
+            int[] intArray = new int[] {Integer.parseInt(Integer.toString(R.drawable.img_push1)),Integer.parseInt(Integer.toString(R.drawable.img_push2)),Integer.parseInt(Integer.toString(R.drawable.img_push3)),Integer.parseInt(Integer.toString(R.drawable.img_push4))};
+            PushItem pushItem2 = new PushItem(pushlist[i],intArray[i]);
             pushItemList.add(pushItem2);
         }
     }

@@ -35,8 +35,8 @@
             android:name=".view.homepage.HomePageActivity"
             android:launchMode="singleTop" />
         <activity android:name=".view.data.ClockActivity" />
-        <activity android:name=".view.data.TestClock">
-
+        <activity android:name=".view.data.TestClock"/>
+        <activity android:name=".view.lead.LeadActivity">
         </activity>
         <activity android:name=".controller.dataManagement.DataTestActivity">
             <intent-filter>

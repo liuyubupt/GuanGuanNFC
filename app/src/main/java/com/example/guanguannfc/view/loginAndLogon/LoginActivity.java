@@ -1,5 +1,6 @@
 package com.example.guanguannfc.view.loginAndLogon;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -74,18 +75,19 @@ public class LoginActivity extends AppCompatActivity {
         colorRedDark = getResources().getColor(R.color.colorRedDark);
     }
 
+    @SuppressLint("WrongConstant")
     public void click(View v){
         int id=v.getId();
 
         switch(id){
             case R.id.button_signin:
-                tv_sign.setTextColor(colorRedDark);
-                tv_log.setTextColor(colorgray);
+                tv_sign.setVisibility(4);
+                tv_log.setVisibility(0);
                 getFragmentManager().beginTransaction().replace(R.id.logandsign,frag_signin).commit();
                 break;
             case R.id.button_logon:
-                tv_sign.setTextColor(colorgray);
-                tv_log.setTextColor(colorRedDark);
+                tv_sign.setVisibility(0);
+                tv_log.setVisibility(4);
                 getFragmentManager().beginTransaction().replace(R.id.logandsign,frag_logon).commit();
                 break;
 

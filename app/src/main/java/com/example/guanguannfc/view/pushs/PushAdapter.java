@@ -2,6 +2,7 @@ package com.example.guanguannfc.view.pushs;
 
 import android.app.ActionBar;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -47,20 +49,22 @@ public class PushAdapter extends ArrayAdapter {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showpush(pushItem.getTitle(),pushItem.getAuthor(),pushItem.getContent(),pushItem.getPinlun());
+                showpush(pushItem.getTitle(),pushItem.getAuthor(),pushItem.getContent(),pushItem.getPinlun(), pushItem.getImageId());
             }
         });
 
 
         return view;
     }
-    private void showpush(String title,String Author,String content,String pinlun){
+    private void showpush(String title,String Author,String content,String pinlun,int id){
         View contentView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_show_push, null);
         mPopWindow = new PopupWindow(contentView, ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT, true);
         TextView tv_push_title=contentView.findViewById(R.id.tv_push_title);
         TextView tv_push_author=contentView.findViewById(R.id.tv_push_author);
         TextView tv_push_content=contentView.findViewById(R.id.tv_push_content);
         TextView tv_push_pinlun=contentView.findViewById(R.id.tv_push_pinlun);
+        LinearLayout lay_showpush2=contentView.findViewById(R.id.lay_showpush2);
+        lay_showpush2.setBackground(getContext().getResources().getDrawable(id));
         tv_push_title.setText(title);
         tv_push_author.setText("作者："+Author);
         tv_push_content.setText(content);

@@ -62,7 +62,7 @@ public class ManageFragment extends Fragment {
     private String name;
     private int num;
     private GridView gridView1;
-    TextView tv_box,tv_time;
+    ImageView tv_box,tv_time;
     // 获取颜色资源文件
     int colorgray,colorRedDark;
     //Model：定义的数据
@@ -523,8 +523,8 @@ public class ManageFragment extends Fragment {
                 lay_box.setVisibility(View.VISIBLE);
                 lay_time.setVisibility(View.INVISIBLE);
                 lay_search.setVisibility(View.INVISIBLE);
-                tv_box.setTextColor(colorRedDark);
-                tv_time.setTextColor(colorgray);
+                tv_box.setImageDrawable(getResources().getDrawable((R.drawable.img_box)));
+                tv_time.setImageDrawable(getResources().getDrawable((R.drawable.img_notime)));
             }
         });
         view.findViewById(R.id.tv_timemanagement).setOnClickListener(new View.OnClickListener() {
@@ -534,8 +534,8 @@ public class ManageFragment extends Fragment {
                 lay_box.setVisibility(View.INVISIBLE);
                 lay_time.setVisibility(View.VISIBLE);
                 lay_search.setVisibility(View.INVISIBLE);
-                tv_box.setTextColor(colorgray);
-                tv_time.setTextColor(colorRedDark);
+                tv_box.setImageDrawable(getResources().getDrawable((R.drawable.img_nobox)));
+                tv_time.setImageDrawable(getResources().getDrawable((R.drawable.img_time)));
             }
         });
         view.findViewById(R.id.sv_goods).setOnClickListener(new View.OnClickListener() {

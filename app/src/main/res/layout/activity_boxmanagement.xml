@@ -4,12 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/img_databack">
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="434dp"
-        android:layout_height="52dp"
+        android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:gravity="center"
@@ -21,35 +22,29 @@
         tools:ignore="MissingConstraints">
 
 
-            <TextView
+            <ImageView
                 android:id="@+id/tv_timemanagement"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:gravity="center"
-                android:padding="10dp"
                 android:onClick="click2"
                 android:text="时间管理"
+                android:src="@drawable/img_notime"
                 android:layout_weight="1"
                 android:textSize="20sp" />
-
-            <TextView
+            <ImageView
                 android:id="@+id/tv_boxmanage"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:gravity="center"
                 android:onClick="click2"
+                android:src="@drawable/img_box"
                 android:text="物品管理"
                 android:layout_weight="1"
-                android:textColor="@color/colorRedDark"
                 android:textSize="20sp" />
 
 
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:gravity="center" />
 
 
     </LinearLayout>
@@ -161,6 +156,7 @@
                 android:layout_height="match_parent"
                 android:text="活动类型"
                 android:gravity="center"
+                android:textColor="@color/colorWhite"
                 />
             <ImageView
                 android:id="@+id/btn_shuaxin"
@@ -168,7 +164,6 @@
                 android:layout_height="25dp"
                 android:layout_marginStart="10dp"
                 android:src="@drawable/img_shuaxin"
-
                 app:layout_constraintStart_toEndOf="@+id/textView7"
                 app:layout_constraintTop_toTopOf="parent" />
         </LinearLayout>

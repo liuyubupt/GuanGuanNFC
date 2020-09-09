@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 import com.example.guanguannfc.R;
 import com.example.guanguannfc.view.homepage.HomePageActivity;
 import com.example.guanguannfc.controller.userManagement.Login;
+import com.example.guanguannfc.view.lead.LeadActivity;
 
 
 public class SigninFragment extends Fragment {
@@ -88,12 +89,11 @@ public class SigninFragment extends Fragment {
 //                        bundle.putString("userName",username);
 //                        intent.putExtras(bundle);
 //                        startActivity(intent);
-                        Intent intent = new Intent(getActivity(), HomePageActivity.class);
+                        Intent intent = new Intent(getActivity(), LeadActivity.class);
                         editorMain.putBoolean("main",true);
                         editorMain.putString("userName",username);
                         editorMain.putString("psw",psw);
                         editorMain.commit();
-
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                         Bundle bundle=new Bundle();
                         bundle.putString("userName",username);

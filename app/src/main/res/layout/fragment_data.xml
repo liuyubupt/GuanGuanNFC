@@ -3,39 +3,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/img_databack">
 
     <LinearLayout
         android:id="@+id/ll_select"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         >
-        <TextView
+        <ImageView
             android:id="@+id/text_show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="数据展示"
             android:textSize="20sp"
-            android:textColor="@color/colorRed"
+            android:textColor="@color/colorbBlack"
             android:onClick="click"
+            android:src="@drawable/img_datadisplay"
             android:paddingVertical="5dp"
             android:layout_weight="1"
             android:gravity="center"
-            ></TextView>
+            ></ImageView>
 
-        <TextView
+        <ImageView
             android:id="@+id/text_allact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="所有活动"
+            android:src="@drawable/img_noallact"
             android:textSize="20sp"
             android:onClick="click"
             android:paddingVertical="5dp"
             android:layout_weight="1"
             android:gravity="center"
-            ></TextView>
+            ></ImageView>
 
     </LinearLayout>
 
@@ -373,7 +376,7 @@
         android:id="@+id/layout_chosetime"
         android:layout_width="220dp"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite"
+        android:background="@drawable/img_personal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:visibility="invisible"
