@@ -76,7 +76,7 @@ public class HttpUtil {
             // 请求方式
             connection.setRequestMethod("POST");
             // 超时时间
-            connection.setConnectTimeout(200);
+            connection.setConnectTimeout(5000);
             // 设置是否输出
             connection.setDoOutput(true);
             // 设置是否读入
@@ -182,10 +182,8 @@ public class HttpUtil {
 
 
     public static String post(String urls, String params) {
-        OutputStream out = null;
-        BufferedReader bufferedReader = null;
-        try {
 
+        try {
             // 1. 获取访问地址URL
             URL url = new URL(urls);
             // 2. 创建HttpURLConnection对象
@@ -195,7 +193,7 @@ public class HttpUtil {
             // 请求方式
             connection.setRequestMethod("POST");
             // 超时时间
-            connection.setConnectTimeout(200);
+            connection.setConnectTimeout(100);
             // 设置是否输出
             connection.setDoOutput(true);
             // 设置是否读入
@@ -209,45 +207,39 @@ public class HttpUtil {
                     "application/x-www-form-urlencoded");
             // 连接(有问题)
 //            connection.connect();
-
+            /* 4. 处理输入输出 */
+            // 写入参数到请求中
+            OutputStream out = connection.getOutputStream();
+            out.write(params.getBytes());
+            out.flush();
+            out.close();
+            // 从连接中读取响应信息
+            String msg = "";
             int code = connection.getResponseCode();
             if (code == 200) {
-                /* 4. 处理输入输出 */
-                // 写入参数到请求中
-                out = connection.getOutputStream();
-                out.write(params.getBytes());
+                BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(connection.getInputStream()));
+                String line;
 
-                // 从连接中读取响应信息
-                bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                String temp = null;
-                StringBuffer stringBuffer = new StringBuffer();
-                while ((temp = bufferedReader.readLine()) != null) {
-                    stringBuffer.append(temp);
+                while ((line = reader.readLine()) != null) {
+                    msg += line;
                 }
-                return stringBuffer.toString();
-
+                reader.close();
+                return msg;
             }
             // 5. 断开连接
             connection.disconnect();
 
             // 处理结果
-            return "网络错误";
+            System.out.println(msg);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
-            try {
-                out.flush();
-                out.close();
-                bufferedReader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }finally {
-                return "网络错误";
-            }
         }
-
+        return "网络故障";
 
     }
+
+
 }
