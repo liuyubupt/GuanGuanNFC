@@ -1,6 +1,7 @@
 package com.example.guanguannfc.view.data;
 
 import android.content.Context;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,6 +30,7 @@ import com.example.guanguannfc.model.Initialization;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -46,6 +48,10 @@ public class tree extends AppCompatActivity {
     private List<BallModel> mBallList;
     private List<TipsModel> mTipsList;
     private Context context;
+    private ListView listView;
+    private TreeAdapter adapter;
+    private SoundPool mSoundPool = null;
+    private HashMap<Integer, Integer> hm = new HashMap<Integer, Integer>();//声明HashMap来存放声音文件
     DaoActSta daoActSta = new  DaoActSta(this);
 
     protected void onCreate(@Nullable Bundle savedInstanceState){
@@ -56,9 +62,9 @@ public class tree extends AppCompatActivity {
 
         setContentView(R.layout.tree);
 
-        TreeAdapter adapter = new TreeAdapter(tree.this,R.layout.tree_view,tl);
+        adapter = new TreeAdapter(tree.this,R.layout.tree_view,tl);
 
-        ListView listView = findViewById(R.id.treeview);
+        listView = findViewById(R.id.treeview);
         listView.setAdapter(adapter);
         allactivity = new Allactivity(this);
 
@@ -73,6 +79,12 @@ public class tree extends AppCompatActivity {
         }
         String str1="早上好";
 
+
+//        Initialization.initialization(this);
+//        FakeData fakeData = new FakeData(this);
+//        fakeData.insert();
+        initView();
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -84,12 +96,13 @@ public class tree extends AppCompatActivity {
                 //Toast.makeText(tree.this, String.valueOf(s), Toast.LENGTH_SHORT).show();
 
             }
-            });
+        });
 
-//        Initialization.initialization(this);
-//        FakeData fakeData = new FakeData(this);
-//        fakeData.insert();
-        initView();
+        try {
+            initSoundPool();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         mWaterFlake = findViewById(R.id.custom_view);
 
@@ -106,6 +119,8 @@ public class tree extends AppCompatActivity {
             public void onItemClick(BallModel ballModel) {
                 Toast.makeText(tree.this,"获得了"+ballModel.getValue()+"积分",Toast.LENGTH_SHORT).show();
                 daoActSta.update(ballModel.getID(),1);
+                mSoundPool.play(hm.get(1), 1, 1, 0, 0, 1);
+                initView();
                 //需要给活动记录插入一条已使用过的标记
             }
         });
@@ -119,29 +134,46 @@ public class tree extends AppCompatActivity {
     }
 
     public void initView(){
+        tl = new ArrayList<>();
         userName = getIntent().getStringExtra("userName");
-        Initialization.initialization(this);
-        FakeData fakeData = new FakeData(this);
-        fakeData.insert();
         Data = allactivity.sortedactivity1(userName,"全部","最新活动在前");
         if (Data != null) {
-            for (int a= 0; a<Math.min(10,Data.length); a++){
+            for (int a= 0; a<Math.min(100,Data.length); a++){
                 //double f = Math.ceil(Integer.parseInt(Data[a][4])/50000);
-                if(Data[a][0] .equals("学习")|| Data[a][0].equals("工作")){
+                if(Data[a][0] .equals("学习")|| Data[a][0].equals("工作")|| Data[a][0].equals("锻炼")){
                     if(Data[a][7].equals("0")){
-                        TreeView t = new TreeView(Data[a][0],Data[a][1],Data[a][2],String.valueOf(2*Integer.parseInt(Data[a][4])/(30*60*10)),"未被收取");
-                        tl.add(t);
+                        if(Data[a][0].equals("学习")){
+                            if (2*Integer.parseInt(Data[a][4])/(30*60*10) > 0) {
+                                TreeView t = new TreeView(Data[a][0],Data[a][1],Data[a][2],String.valueOf(2*Integer.parseInt(Data[a][4])/(30*60*10)),"未被收取");
+                                tl.add(t);
+                            }
+                        }else {
+
+                            if (2*Integer.parseInt(Data[a][4])/(30*60*10*2) > 0) {
+                                TreeView t = new TreeView(Data[a][0],Data[a][1],Data[a][2],String.valueOf(2*Integer.parseInt(Data[a][4])/(30*60*10*2)),"未被收取");
+                                tl.add(t);
+                            }
+                        }
                     }
                     else {
-                        TreeView t2 = new TreeView(Data[a][0],Data[a][1],Data[a][2],String.valueOf(2*Integer.parseInt(Data[a][4])/(30*60*10)),"已被收取");
-                        tl.add(t2);
+                        if(Data[a][0].equals("学习")){
+                            if (2*Integer.parseInt(Data[a][4])/(30*60*10) > 0) {
+                                TreeView t = new TreeView(Data[a][0],Data[a][1],Data[a][2],String.valueOf(2*Integer.parseInt(Data[a][4])/(30*60*10)),"已被收取");
+                                tl.add(t);
+                            }
+                            }else {
+                            if (2*Integer.parseInt(Data[a][4])/(30*60*10*2) > 0) {
+                                TreeView t = new TreeView(Data[a][0],Data[a][1],Data[a][2],String.valueOf(2*Integer.parseInt(Data[a][4])/(30*60*10*2)),"已被收取");
+                                tl.add(t);
+                            }
+                        }
                     }
                 }
             }
         }
 
         mBallList = new ArrayList<>();
-        ArrayList<HelperActivity> helperActivities = daoActSta.queryByLengthDesc(userName);
+        ArrayList<HelperActivity> helperActivities = daoActSta.queryByTimeDesc(userName);
         if (helperActivities != null) {
             for (HelperActivity activity : helperActivities) {
                 int ranked = activity.getIs_ranked();
@@ -169,6 +201,17 @@ public class tree extends AppCompatActivity {
         mTipsList.add(new TipsModel(" 锻炼半小时1分！"));
         mTipsList.add(new TipsModel(" 工作半小时1分！"));
         mTipsList.add(new TipsModel(" 养成良好的习惯！"));
+        adapter = new TreeAdapter(tree.this,R.layout.tree_view,tl);
+        listView.setAdapter(adapter);
+    }
+
+    private void initSoundPool() throws Exception{//初始化声音池
+        SoundPool.Builder spb = new SoundPool.Builder();
+        spb.setMaxStreams(10);
+        //spb.setAudioAttributes(null);    //转换音频格式
+        mSoundPool = spb.build();
+        //加载声音文件，并且设置为1号声音放入hm中
+        hm.put(1, mSoundPool.load(this, R.raw.bubble_guan, 1));
     }
 
     private int StudyPoint(String time){
