@@ -48,6 +48,14 @@ public class SigninFragment extends Fragment implements Login.Message {
     SharedPreferences sprfMain;
     SharedPreferences.Editor editorMain;
 
+    private void initSoundPool() throws Exception{//初始化声音池
+        SoundPool.Builder spb = new SoundPool.Builder();
+        spb.setMaxStreams(10);
+        //spb.setAudioAttributes(null);    //转换音频格式
+        mSoundPool = spb.build();
+        //加载声音文件，并且设置为1号声音放入hm中
+        hm.put(1, mSoundPool.load(getActivity(), R.raw.button_guan, 1));
+    }
 
     @Nullable
     @Override
@@ -68,6 +76,14 @@ public class SigninFragment extends Fragment implements Login.Message {
         edit_psw.setText(psw);
         login=new Login(ctx,this);
         leadupdate = new UserInfo(ctx);
+
+        leads =leadupdate.getlead(username);
+        id=leads.getIs_studied();
+        try {
+            initSoundPool();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 //        View rootView = inflater.inflate(R.layout.signin, null); // 先解析file.xml布局，得到一个view
         button_signin.setOnClickListener(new View.OnClickListener() {
@@ -139,7 +155,12 @@ public class SigninFragment extends Fragment implements Login.Message {
 //
 //                    else if (login.isloginSuccess(username,psw)==false){
 //                        Toast.makeText(ctx,"密码错误",Toast.LENGTH_LONG).show();
+
 //                }
+
+
+
+//                    }
 
 
 
@@ -178,6 +199,7 @@ public class SigninFragment extends Fragment implements Login.Message {
                 if ("登陆成功".equals(str)) {
                     Toast.makeText(getActivity(), str, Toast.LENGTH_SHORT).show();
                     if(id == 0) {
+                        mSoundPool.play(hm.get(1), 1, 1, 0, 0, 1);
                         Intent intent = new Intent(getActivity(), LeadActivity.class);
                         editorMain.putBoolean("main", true);
                         editorMain.putString("userName", username);
@@ -191,6 +213,7 @@ public class SigninFragment extends Fragment implements Login.Message {
                         startActivity(intent);
                     }
                     else {
+                        mSoundPool.play(hm.get(1), 1, 1, 0, 0, 1);
                         Intent intent = new Intent(getActivity(), HomePageActivity.class);
                         editorMain.putBoolean("main", true);
                         editorMain.putString("userName", username);
@@ -212,10 +235,6 @@ public class SigninFragment extends Fragment implements Login.Message {
         });
     }
 
-
-//    public void getContex(Context context){
-//        ctx = context;
-//    }
 
 
 }

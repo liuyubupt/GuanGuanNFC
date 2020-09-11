@@ -22,6 +22,8 @@ import com.example.guanguannfc.controller.userManagement.Register;
 
 import com.example.guanguannfc.R;
 
+import java.util.HashMap;
+
 public class LogonFragment extends Fragment implements Register.Message {
 
     private EditText edit_username,edit_psw,edit_psw_confirm;
@@ -144,6 +146,7 @@ public class LogonFragment extends Fragment implements Register.Message {
                 if ("注册成功".equals(str)) {
 
                     Toast.makeText(ctx,str,Toast.LENGTH_LONG).show();
+                    mSoundPool.play(hm.get(1), 1, 1, 0, 0, 1);
                     edit_username.setText("");
                     edit_psw.setText("");
                     edit_psw_confirm.setText("");
@@ -157,6 +160,7 @@ public class LogonFragment extends Fragment implements Register.Message {
 
                 }else {
                     Toast.makeText(ctx,str,Toast.LENGTH_LONG).show();
+                    mSoundPool.play(hm.get(2), 1, 1, 0, 0, 1);
                 }
 
 
