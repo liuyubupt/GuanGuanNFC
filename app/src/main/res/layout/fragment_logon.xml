@@ -80,6 +80,7 @@
         android:layout_marginTop="5dp"
         android:scaleX="0.8"
         android:scaleY="0.8"
+
         app:layout_constraintStart_toStartOf="@+id/edit_username"
         app:layout_constraintTop_toBottomOf="@+id/edit_psw_confirm"></CheckBox>
 
@@ -88,28 +89,52 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="click"
-
-        android:layout_marginTop="5dp"
-        android:text="我同意"
+        android:text="已阅读并同意"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/checkBox"
         app:layout_constraintStart_toEndOf="@id/checkBox"
         app:layout_constraintTop_toTopOf="@+id/checkBox"></TextView>
+
     <TextView
         android:id="@+id/text_agree"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="click"
-        android:textColor="@color/colorPrimaryDark"
-
-        android:layout_marginTop="5dp"
-        android:text="使用协议"
+        android:text="《用户注册协议》"
+        android:textColor="@color/colorMBlue"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/checkBox"
         app:layout_constraintStart_toEndOf="@id/textView4"
+        app:layout_constraintTop_toTopOf="@+id/checkBox"></TextView>
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="click"
+        android:text="和"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/checkBox"
+        app:layout_constraintStart_toEndOf="@+id/text_agree"
+        app:layout_constraintTop_toTopOf="@+id/checkBox"></TextView>
+
+    <TextView
+        android:id="@+id/text_agree2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="click"
+        android:text="《隐私权协议》"
+        android:textColor="@color/colorMBlue"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/checkBox"
+        app:layout_constraintStart_toEndOf="@+id/textView5"
         app:layout_constraintTop_toTopOf="@+id/checkBox"></TextView>
 
     <Button
         android:id="@+id/button_logon_confirm"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/button_log"
 
         android:onClick="click"
@@ -132,8 +157,8 @@
 
         <ImageView
             android:id="@+id/load_img"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_centerInParent="true"
             android:src="@drawable/liuyu_load" />
     </RelativeLayout>

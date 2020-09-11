@@ -38,7 +38,7 @@ import java.io.InputStreamReader;
 
 
 public class ClockActivity  extends BaseNfcActivity {
-    private Button btn_share,btn_stop;
+    private ImageView btn_share,btn_stop;
     private TextView tv_start_time,tv_now_time,tv_distance,tv_duration,tv_event_type,tv_event_name;
     private String startTime,nowTime,duration,isFirst,userName,actName,actType;
     private Long lstartTime,date,endTime;
@@ -325,7 +325,7 @@ public class ClockActivity  extends BaseNfcActivity {
                 Toast.makeText(this,"打卡成功",Toast.LENGTH_SHORT).show();
             }
             else {
-                Toast.makeText(this,"今日已打卡",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this,"今日已打卡",Toast.LENGTH_SHORT).show();
             }
         }
         else {

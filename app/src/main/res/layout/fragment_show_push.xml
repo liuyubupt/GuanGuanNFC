@@ -5,7 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorbBlack"
+    android:alpha="0.6"
+    ></ImageView>
     <LinearLayout
         android:id="@+id/lay_showpush"
         android:layout_width="370dp"
@@ -67,6 +72,7 @@
             android:layout_marginTop="40dp"
             android:gravity="center"
             android:text="内容"
+            android:visibility="invisible"
             android:textSize="20sp"></TextView>
 
 

@@ -4,17 +4,7 @@
     android:layout_height="60dp"
     >
 
-    <ImageView
-        android:id="@+id/btn_back"
-        android:layout_width="40dp"
-        android:layout_height="30dp"
-        android:onClick="click"
-        android:layout_marginStart="10dp"
 
-        android:src="@drawable/back"
-        android:layout_centerVertical="true"
-
-        ></ImageView>
 
 
     <ImageView
@@ -29,6 +19,16 @@
         android:textSize="20sp"
 
         ></ImageView>
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:onClick="click"
+        android:layout_marginStart="10dp"
 
+        android:src="@drawable/back"
+        android:layout_centerVertical="true"
+
+        ></ImageView>
 
 </RelativeLayout>

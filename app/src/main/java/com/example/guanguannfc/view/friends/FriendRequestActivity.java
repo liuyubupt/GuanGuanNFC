@@ -28,7 +28,7 @@ public class FriendRequestActivity extends AppCompatActivity implements Friend.M
 
     private Friend friend;
     private String[][] arr_request;
-
+    private String friendName;
     private ImageView img_back;
 
     private boolean isRefuse,isAgree;
@@ -46,6 +46,7 @@ public class FriendRequestActivity extends AppCompatActivity implements Friend.M
         lv_friendRequest = findViewById(R.id.lv_friendRequest);
         img_back=findViewById(R.id.btn_back);
 
+
         getRequestList();
         initList();
 
@@ -61,20 +62,20 @@ public class FriendRequestActivity extends AppCompatActivity implements Friend.M
 //            friendRequestItemsList.add(friendRequestItem);
 //        }
 
-        if (arr_request!=null){
-            for (int i=0;i<arr_request.length;i++){
-                FriendRequestItem friendRequestItem = new FriendRequestItem(arr_request[i]);
-                friendRequestItemsList.add(friendRequestItem);
-            }
+//        if (arr_request!=null){
+//            for (int i=0;i<arr_request.length;i++){
+//                FriendRequestItem friendRequestItem = new FriendRequestItem(arr_request[i]);
+//                friendRequestItemsList.add(friendRequestItem);
+//            }
             friendRequestAdapter = new FriendRequestAdapter(FriendRequestActivity.this,R.layout.item_friendrequest,friendRequestItemsList,this);
-            lv_friendRequest.setAdapter(friendRequestAdapter);
+//            lv_friendRequest.setAdapter(friendRequestAdapter);
         }
 
-        else {
-            Toast.makeText(FriendRequestActivity.this,"无好友请求",Toast.LENGTH_LONG).show();
-        }
+//        else {
+//            Toast.makeText(FriendRequestActivity.this,"无好友请求",Toast.LENGTH_LONG).show();
+//        }
 
-    }
+//    }
 
     private void getRequestList() {
         friend = new Friend(this,this);
@@ -90,29 +91,24 @@ public class FriendRequestActivity extends AppCompatActivity implements Friend.M
             @Override
             public void onRefuseClick(int i) {
                 final String friendName = arr_request[i][0];
-                mark=1;
+
                friend.updateapply(userName,friendName);
-                if (isRefuse) {
-                    Toast.makeText(FriendRequestActivity.this,"已拒绝"+friendName+"的好友请求",Toast.LENGTH_LONG).show();
-                }
-                else {
-                    Toast.makeText(FriendRequestActivity.this,"出错了，请重试",Toast.LENGTH_LONG).show();
-                }
+
             }
         });
 
         friendRequestAdapter.setOnAgreeListener(new FriendRequestAdapter.onAgreeListener() {
             @Override
             public void onAgreeClick(int i) {
-                final String friendName = arr_request[i][0];
-                mark=2;
+                friendName = arr_request[i][0];
+
                 friend.insert(userName,friendName);
-                if (isAgree) {
-                    Toast.makeText(FriendRequestActivity.this,"成功添加"+friendName+"为好友",Toast.LENGTH_LONG).show();
-                }
-                else {
-                    Toast.makeText(FriendRequestActivity.this,"出错了，请重试",Toast.LENGTH_LONG).show();
-                }
+//                if (isAgree) {
+//                    Toast.makeText(FriendRequestActivity.this,"成功添加"+friendName+"为好友",Toast.LENGTH_LONG).show();
+//                }
+//                else {
+//                    Toast.makeText(FriendRequestActivity.this,"出错了，请重试",Toast.LENGTH_LONG).show();
+//                }
             }
         });
 
@@ -131,27 +127,74 @@ public class FriendRequestActivity extends AppCompatActivity implements Friend.M
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-               if (mark==1){
-                   isRefuse =bl;
-                   mark=0;
-               }
-               else if (mark==2){
-                   isAgree =bl;
-               }
+                isAgree =bl;
+
+                if (isAgree) {
+                    Toast.makeText(FriendRequestActivity.this,"成功添加"+friendName+"为好友",Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Toast.makeText(FriendRequestActivity.this,"出错了，请重试",Toast.LENGTH_LONG).show();
+                }
             }
         });
 
     }
 
     @Override
+    public void getLoadMessage0(boolean bl) {
+
+    }
+
+    @Override
     public void getLoadMessage1(final String[][] arr) {
+
+
+
+    }
+
+    @Override
+    public void getLoadMessage2(String[][] arr) {
+
+    }
+
+    @Override
+    public void getLoadMessage3(final String[][] arr) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 arr_request =arr;
+                if (arr_request!=null){
+                    for (int i=0;i<arr_request.length;i++){
+                        FriendRequestItem friendRequestItem = new FriendRequestItem(arr_request[i]);
+                        friendRequestItemsList.add(friendRequestItem);
+                    }
+                    lv_friendRequest.setAdapter(friendRequestAdapter);
+                }
             }
         });
+    }
 
+    @Override
+    public void getLoadMessage5(final boolean bl) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                    isRefuse =bl;
+                    if (isRefuse) {
+                        Toast.makeText(FriendRequestActivity.this,"已拒绝"+friendName+"的好友请求",Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        Toast.makeText(FriendRequestActivity.this,"出错了，请重试",Toast.LENGTH_LONG).show();
+                    }
+
+
+            }
+        });
+    }
+
+    @Override
+    public void getLoadMessage6(boolean bl) {
 
     }
 }

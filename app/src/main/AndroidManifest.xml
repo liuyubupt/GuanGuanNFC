@@ -37,9 +37,6 @@
 
         <activity android:name=".controller.EnergyTree.EnergyTreeTest"></activity>
 
-        <activity android:name=".controller.EnergyTree.EnergyTreeTest">
-            
-        </activity>
 
         <activity android:name=".view.friends.FriendRequestActivity">
 

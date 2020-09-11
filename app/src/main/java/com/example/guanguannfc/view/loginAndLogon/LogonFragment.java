@@ -47,6 +47,9 @@ public class LogonFragment extends Fragment implements Register.Message {
         edit_psw_confirm=view.findViewById(R.id.edit_psw_confirm);
         checkBox=view.findViewById(R.id.checkBox);
 
+        loadImg = view.findViewById(R.id.load_img);
+        mRelativeLayout = view.findViewById(R.id.rela_img);
+
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {

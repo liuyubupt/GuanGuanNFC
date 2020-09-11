@@ -58,17 +58,63 @@
         android:text="忘记密码"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="12dp"
-
+        android:visibility="invisible"
         app:layout_constraintTop_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="@+id/edit_username"
 
          ></TextView>
 
+    <TextView
+        android:id="@+id/textView0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="click"
+        android:text="登入即代表已阅读并同意"
+        android:textSize="11dp"
+        android:layout_marginTop="10dp"
+
+        app:layout_constraintStart_toStartOf="@+id/edit_psw"
+        app:layout_constraintTop_toBottomOf="@+id/edit_psw"></TextView>
+
+    <TextView
+        android:id="@+id/text_agree1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="click"
+        android:text="《隐私权协议》"
+        android:textColor="@color/colorMBlue"
+        android:textSize="11dp"
+        app:layout_constraintBottom_toBottomOf="@+id/checkBox"
+        app:layout_constraintStart_toEndOf="@+id/textView0"
+        app:layout_constraintTop_toTopOf="@+id/textView0"></TextView>
+
+    <TextView
+        android:id="@+id/textView00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="click"
+        android:text="和"
+        android:textSize="11dp"
+        app:layout_constraintBottom_toBottomOf="@+id/checkBox"
+        app:layout_constraintStart_toEndOf="@+id/text_agree1"
+        app:layout_constraintTop_toTopOf="@+id/textView0"></TextView>
+
+    <TextView
+        android:id="@+id/text_agree2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="click"
+        android:text="《隐私权协议》"
+        android:textColor="@color/colorMBlue"
+        android:textSize="11dp"
+        app:layout_constraintBottom_toBottomOf="@+id/checkBox"
+        app:layout_constraintStart_toEndOf="@+id/textView00"
+        app:layout_constraintTop_toTopOf="@+id/textView0"></TextView>
     <Button
         android:id="@+id/button_signin_confirm"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/button_log"
         android:text="登录"
 
@@ -90,8 +136,8 @@
 
         <ImageView
             android:id="@+id/load_img"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_centerInParent="true"
             android:src="@drawable/liuyu_load" />
     </RelativeLayout>

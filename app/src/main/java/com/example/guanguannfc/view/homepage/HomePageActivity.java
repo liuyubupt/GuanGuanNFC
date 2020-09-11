@@ -344,13 +344,7 @@ public class HomePageActivity extends BaseNfcActivity implements View.OnClickLis
                 addFriendDialog.getName().setText("");
                 addFriendDialog.getRemark().setText("");
                 friend.apply(userName,addName,addRemark);
-                if (isSend) {
-                    Toast.makeText(HomePageActivity.this,"请求已发送",Toast.LENGTH_LONG).show();
 
-                }
-                else {
-                    Toast.makeText(HomePageActivity.this,"请求发送失败",Toast.LENGTH_LONG).show();
-                }
 
             }
         });
@@ -1266,18 +1260,50 @@ public class HomePageActivity extends BaseNfcActivity implements View.OnClickLis
 
     @Override
     public void getLoadMessage(final boolean bl) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                isSend =bl;
-            }
-        });
 
+
+
+    }
+
+    @Override
+    public void getLoadMessage0(boolean bl) {
 
     }
 
     @Override
     public void getLoadMessage1(String[][] arr) {
 
+    }
+
+    @Override
+    public void getLoadMessage2(String[][] arr) {
+
+    }
+
+    @Override
+    public void getLoadMessage3(String[][] arr) {
+
+    }
+
+    @Override
+    public void getLoadMessage5(boolean bl) {
+
+    }
+
+    @Override
+    public void getLoadMessage6(final boolean bl) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                isSend =bl;
+                if (isSend) {
+                    Toast.makeText(HomePageActivity.this,"请求已发送",Toast.LENGTH_LONG).show();
+
+                }
+                else {
+                    Toast.makeText(HomePageActivity.this,"出错了，请重试",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 }

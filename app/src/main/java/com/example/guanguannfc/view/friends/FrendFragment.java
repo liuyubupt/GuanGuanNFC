@@ -12,10 +12,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.guanguannfc.R;
 import com.example.guanguannfc.controller.userManagement.Friend;
@@ -41,9 +45,13 @@ public class FrendFragment extends Fragment implements Friend.Message{
     private Friend friend;
     private String del_name;
 
-    private int mark=0;
+    private boolean isdel;
 
 
+
+    private ImageView loadImg,loadImg2;
+    private RelativeLayout mRelativeLayout,mRelativeLayout2;
+    private Animation animation;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,19 +67,29 @@ public class FrendFragment extends Fragment implements Friend.Message{
 //        Toast.makeText(getActivity(),"用户名"+userName,Toast.LENGTH_LONG).show();
         initView();
         checkClick();
+
         getFriends();
         if (friendList!=null){
             initFriends(friendList);
         }
+        friendAdapter = new FriendAdapter(getActivity(),R.layout.item_friend,friendItemsList,this);
+        lv_friends.setAdapter(friendAdapter);
+
+
         getFriendAct();
         if (friendActList != null) {
             initFriendAct(friendActList);
         }
-
-        friendAdapter = new FriendAdapter(getActivity(),R.layout.item_friend,friendItemsList,this);
-        lv_friends.setAdapter(friendAdapter);
         friendActAdapter = new FriendActAdapter(getActivity(),R.layout.item_friendact,friendActItemList);
         lv_friendAct.setAdapter(friendActAdapter);
+
+        //动画效果
+        mRelativeLayout2.setVisibility(View.VISIBLE);
+        animation = AnimationUtils.loadAnimation(getActivity(), R.anim.tip);
+        animation.setDuration(500);
+        animation.setRepeatCount(8);//动画的反复次数
+        animation.setFillAfter(true);//设置为true，动画转化结束后被应用
+        loadImg2.startAnimation(animation);//開始动画
         return view;
 
     }
@@ -104,6 +122,10 @@ public class FrendFragment extends Fragment implements Friend.Message{
 
         friend = new Friend(getActivity(),this);
 
+        loadImg = view.findViewById(R.id.load_img);
+        mRelativeLayout = view.findViewById(R.id.rela_img);
+        loadImg2 = view.findViewById(R.id.load_img2);
+        mRelativeLayout2 = view.findViewById(R.id.rela_img2);
     }
 
     private void initFriends(String[][] array){
@@ -119,7 +141,7 @@ public class FrendFragment extends Fragment implements Friend.Message{
     }
 
     private void getFriends(){
-        mark=1;
+
         friend.friendlist(userName);
     }
 
@@ -139,7 +161,7 @@ public class FrendFragment extends Fragment implements Friend.Message{
 
     }
     private void getFriendAct(){
-        mark=2;
+
         friend.friendact(userName);
     }
 
@@ -148,25 +170,41 @@ public class FrendFragment extends Fragment implements Friend.Message{
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View view) {
+
+
                 cl_friend.setVisibility(View.VISIBLE);
                 cl_friendAct.setVisibility(View.INVISIBLE);
                 tv_friend.setImageDrawable(getResources().getDrawable((R.drawable.img_friend2)));
                 tv_friendAct.setImageDrawable(getResources().getDrawable((R.drawable.img_nofriend1)));
+
+//                Toast.makeText(getActivity(),"好友",Toast.LENGTH_SHORT).show();
+
+
+
+
             }
         });
         view.findViewById(R.id.text_frindAct).setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View view) {
+                //动画效果
+                animation = AnimationUtils.loadAnimation(getActivity(), R.anim.tip);
+                animation.setDuration(500);
+                animation.setRepeatCount(8);//动画的反复次数
+                animation.setFillAfter(true);//设置为true，动画转化结束后被应用
+                loadImg.startAnimation(animation);//開始动画
+                mRelativeLayout.setVisibility(View.VISIBLE);
+
                 cl_friend.setVisibility(View.INVISIBLE);
                 cl_friendAct.setVisibility(View.VISIBLE);
                 tv_friendAct.setImageDrawable(getResources().getDrawable((R.drawable.img_friend1)));
                 tv_friend.setImageDrawable(getResources().getDrawable((R.drawable.img_nofriend2)));
                 getFriendAct();
-                if (friendActList != null) {
-                    initFriendAct(friendActList);
-                }
-                lv_friendAct.setAdapter(friendActAdapter);
+//                if (friendActList != null) {
+//                    initFriendAct(friendActList);
+//                }
+//                lv_friendAct.setAdapter(friendActAdapter);
 
             }
         });
@@ -186,10 +224,10 @@ public class FrendFragment extends Fragment implements Friend.Message{
                         //在此处写入ok的逻辑
                         friend.delete(userName,del_name);
                         getFriends();
-                        if (friendList!=null){
-                            initFriends(friendList);
-                        }
-                        lv_friends.setAdapter(friendAdapter);
+//                        if (friendList!=null){
+//                            initFriends(friendList);
+//                        }
+//                        lv_friends.setAdapter(friendAdapter);
                     }
                 });
                 dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -211,24 +249,81 @@ public class FrendFragment extends Fragment implements Friend.Message{
     }
 
     @Override
+    public void getLoadMessage0(final boolean bl) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                isdel =bl;
+
+                if (isdel) {
+                    Toast.makeText(getActivity(),"删除成功",Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Toast.makeText(getActivity(),"出错了，请重试",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+
+    //    haoyou
+    @Override
     public void getLoadMessage1(final String[][] arr) {
 
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
 
-                if (mark==1) {
+                loadImg2.clearAnimation();
+                mRelativeLayout2.setVisibility(View.GONE);
                     friendList =arr;
-                    mark=0;
+                    if (friendList!=null){
+                        initFriends(friendList);
+                    }
+                    lv_friends.setAdapter(friendAdapter);
 
-                }else if (mark==2){
-                    friendActList =arr;
-                    mark=0;
-
-                }
 
             }
         });
+
+    }
+
+
+//    huodong
+    @Override
+    public void getLoadMessage2(final String[][] arr) {
+
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                loadImg.clearAnimation();
+                mRelativeLayout.setVisibility(View.GONE);
+
+                    friendActList =arr;
+                    if (friendActList != null) {
+                        initFriendAct(friendActList);
+                    }
+                    lv_friendAct.setAdapter(friendActAdapter);
+
+
+
+            }
+        });
+
+    }
+
+    @Override
+    public void getLoadMessage3(String[][] arr) {
+
+    }
+
+    @Override
+    public void getLoadMessage5(boolean bl) {
+
+    }
+
+    @Override
+    public void getLoadMessage6(boolean bl) {
 
     }
 }

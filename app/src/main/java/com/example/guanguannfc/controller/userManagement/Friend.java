@@ -68,11 +68,11 @@ public class Friend {
                         arr1[i][7]=gt.transString(list.get(i).getShared_time())[0][0];
                         arr1[i][8]=gt.transString(list.get(i).getBegin_time())[0][1];
                     }
-                    message.getLoadMessage1(arr1);
+                    message.getLoadMessage2(arr1);
                 }
                 else {
                     String[][] arr = new String[0][0];
-                    message.getLoadMessage1(arr);
+                    message.getLoadMessage2(arr);
                 }
             }
         }).start();
@@ -98,7 +98,7 @@ public class Friend {
             public void run() {
                 boolean is = DF.delete(username,friendname);
 
-                message.getLoadMessage(is);
+                message.getLoadMessage0(is);
 
             }
         }).start();
@@ -110,7 +110,7 @@ public class Friend {
             public void run() {
                 boolean is = DM.update(username,friendname);
 
-                message.getLoadMessage(is);
+                message.getLoadMessage5(is);
 
             }
         }).start();
@@ -129,11 +129,11 @@ public class Friend {
                         arr[i][1] = list.get(i).getContent();
                         arr[i][2] = gt.timeStampToDate(list.get(i).getTime());
                     }
-                    message.getLoadMessage1(arr);
+                    message.getLoadMessage3(arr);
                 }
                 else {
                     String[][] arr1 = new String[0][0];
-                    message.getLoadMessage1(arr1);
+                    message.getLoadMessage3(arr1);
                 }
             }
         }).start();
@@ -146,7 +146,7 @@ public class Friend {
             public void run() {
                 boolean is = DM.insert(username,friendname,content);
 
-                message.getLoadMessage(is);
+                message.getLoadMessage6(is);
 
             }
         }).start();
@@ -154,7 +154,12 @@ public class Friend {
 
     public interface Message{
         void getLoadMessage(boolean bl);
+        void getLoadMessage0(boolean bl);
         void getLoadMessage1(String[][] arr);
+        void getLoadMessage2(String[][] arr);
+        void getLoadMessage3(String[][] arr);
+        void getLoadMessage5(boolean bl);
+        void getLoadMessage6(boolean bl);
     }
 
 }
