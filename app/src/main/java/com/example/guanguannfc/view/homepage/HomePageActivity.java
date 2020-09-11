@@ -521,6 +521,7 @@ public class HomePageActivity extends BaseNfcActivity implements View.OnClickLis
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(HomePageActivity.this, tree.class);
+                intent.putExtra("userName",userName);
                 startActivity(intent);
             }
         });

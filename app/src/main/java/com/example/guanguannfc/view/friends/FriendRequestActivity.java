@@ -62,6 +62,7 @@ public class FriendRequestActivity extends AppCompatActivity implements Friend.M
 //            friendRequestItemsList.add(friendRequestItem);
 //        }
 
+
 //        if (arr_request!=null){
 //            for (int i=0;i<arr_request.length;i++){
 //                FriendRequestItem friendRequestItem = new FriendRequestItem(arr_request[i]);
@@ -74,6 +75,7 @@ public class FriendRequestActivity extends AppCompatActivity implements Friend.M
 //        else {
 //            Toast.makeText(FriendRequestActivity.this,"无好友请求",Toast.LENGTH_LONG).show();
 //        }
+
 
 //    }
 

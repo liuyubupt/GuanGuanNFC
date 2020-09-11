@@ -64,20 +64,24 @@ public class DaoFriend {
 
     //返回所有好友的用户名和等级：需要给定用户名
     public List<HelperFriend> query(String user_name){
-        List<HelperFriend> list = new ArrayList<HelperFriend>();
-        HelperFriend helperFriend;
-        SQLiteDatabase db=mDataBaseHelper.getWritableDatabase();
-        String sql="select user_name,active_day from User_Info where User_Info._id in (select friend_id from friend_list where user_id=(select _id from user_info where user_name=?))";
-        Cursor cursor=db.rawQuery(sql,new String[]{user_name});
-        if(cursor.getCount()!=0){
-            while(cursor.moveToNext()){
-                helperFriend = new HelperFriend(cursor.getString(0),cursor.getInt(1));
-                list.add(helperFriend);
-            }
-            return list;
-        }else {
-            return list;
-        }
+
+//        HelperFriend helperFriend;
+//        SQLiteDatabase db=mDataBaseHelper.getWritableDatabase();
+//        String sql="select user_name,active_day from User_Info where User_Info._id in (select friend_id from friend_list where user_id=(select _id from user_info where user_name=?))";
+//        Cursor cursor=db.rawQuery(sql,new String[]{user_name});
+//        if(cursor.getCount()!=0){
+//            while(cursor.moveToNext()){
+//                helperFriend = new HelperFriend(cursor.getString(0),cursor.getInt(1));
+//                list.add(helperFriend);
+//            }
+//            return list;
+//        }else {
+//            return list;
+//        }
+        String get = HttpUtil.get("http://49.232.151.194/DaoFriend/query", "user_name=" + user_name);
+        if ("网络故障".equals(get)) return new ArrayList<HelperFriend>();
+        List<HelperFriend> list = JSONArray.parseArray(get, HelperFriend.class);
+        return list != null ? list : new ArrayList<HelperFriend>();
     }
 
     //拿到所有好朋友分享的动态：需给定用户名

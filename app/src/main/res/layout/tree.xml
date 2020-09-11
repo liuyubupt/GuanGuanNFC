@@ -10,15 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
-        android:layout_marginTop="350dp"
-
-        android:divider="@android:color/transparent"
-        android:dividerHeight="20sp"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_actshow"
-
-
+        android:gravity="center_horizontal"
+        android:layout_marginTop="500dp"
+        android:padding="10dp"
         >
     </ListView>
 

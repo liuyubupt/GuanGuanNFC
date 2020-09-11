@@ -56,12 +56,11 @@ public class LoginActivity extends AppCompatActivity implements Login.Message {
             initView();
 //        frag_logon.getContex(this);
             getFragmentManager().beginTransaction().replace(R.id.logandsign,frag_signin).commit();
-
+            //初始化本地数据库
             Initialization.initialization(this);
-            if (!login.LIsExistUserName("aaa")){
-                FakeData fakeData = new FakeData(this);
-                fakeData.insert();
-            }
+            FakeData fakeData = new FakeData(this);
+            fakeData.insert();
+
         }
 
 

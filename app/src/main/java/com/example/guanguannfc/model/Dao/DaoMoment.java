@@ -65,21 +65,28 @@ public class DaoMoment {
 
     //返回所有的好友申请列表：需要给定用户名
     public List<HelperApplication> query(String user_name){
-        List<HelperApplication> list = new ArrayList<HelperApplication>();
-        HelperApplication helperApplication;
-        SQLiteDatabase db=mDataBaseHelper.getWritableDatabase();
-        String sql="select user_name,content,moment_list.created_time from moment_list inner join user_info on user_info._id=moment_list.from_id " +
-                " where to_id=(select _id from user_info where user_name=?) and is_processed=0";
-        Cursor cursor=db.rawQuery(sql,new String[]{user_name});
-        if(cursor.getCount()!=0){
-            while(cursor.moveToNext()){
-                helperApplication = new HelperApplication(cursor.getString(0),cursor.getString(1),cursor.getLong(2));
-                list.add(helperApplication);
-            }
-            return list;
-        }else {
-            return list;
-        }
+
+//        List<HelperApplication> list = new ArrayList<HelperApplication>();
+//        HelperApplication helperApplication;
+//        SQLiteDatabase db=mDataBaseHelper.getWritableDatabase();
+//        String sql="select user_name,content,moment_list.created_time from moment_list inner join user_info on user_info._id=moment_list.from_id " +
+//                " where to_id=(select _id from user_info where user_name=?) and is_processed=0";
+//        Cursor cursor=db.rawQuery(sql,new String[]{user_name});
+//        if(cursor.getCount()!=0){
+//            while(cursor.moveToNext()){
+//                helperApplication = new HelperApplication(cursor.getString(0),cursor.getString(1),cursor.getLong(2));
+//                list.add(helperApplication);
+//            }
+//            return list;
+//        }else {
+//            return list;
+//        }
+        String get = HttpUtil.get("http://49.232.151.194/DaoMoment/query/", "user_name=" + user_name);
+        if ("网络故障".equals(get) || "空".equals(get)) return new ArrayList<HelperApplication>();
+        List<HelperApplication> list = JSONArray.parseArray(get, HelperApplication.class);
+
+        return list != null ? list : new ArrayList<HelperApplication>();
+
     }
 
 
